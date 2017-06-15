@@ -1,12 +1,11 @@
 name: user-magiclink
 description: Socket for authenticating user using magic link
-version: 0.0.1
+version: 0.0.2
 keywords:
   - authentication
   - user
   - magiclink
   - eyedea
-
 classes:
   user:
     - name: email
@@ -27,7 +26,6 @@ classes:
     - name: used_at
       type: datetime
       filter_index: true
-
 endpoints:
   login:
     description: Login user with email
@@ -40,21 +38,18 @@ endpoints:
     response:
       mimetype: application/json
       examples:
-        -
-          exit_code: 200
+        - exit_code: 200
           example: |
             {
               "is_registered": false,
               "token": "7aba843567ccc62386543ebe82837e2f",
               "code": "2b0e9"
             }
-        -
-          exit_code: 400
+        - exit_code: 400
           example: |
             {
               "message": "Invalid email"
             }
-
   confirm:
     description: Confirm user session
     file: scripts/confirm.js
@@ -66,15 +61,13 @@ endpoints:
       token:
         type: string
         description: Session token
-        example: "7aba843567ccc62386543ebe82837e2f"
+        example: 7aba843567ccc62386543ebe82837e2f
     response:
       mimetype: application/json
       examples:
-        -
-          exit_code: 200
+        - exit_code: 200
           example: Logged in. You can now close this tab.
-        -
-          exit_code: 400
+        - exit_code: 400
           example: Invalid url
   verify:
-    channel: verify.{token}
+    channel: 'verify.{token}'
